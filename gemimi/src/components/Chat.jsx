@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function ChatApi() {
   const [mensagens, setMensagens] = useState([]);
@@ -60,11 +60,16 @@ function ChatApi() {
     <div>
       <h2>Chat API</h2>
       <div>
-        {mensagens.slice(0, indiceAtual).map((mensagem) => (
-          <div key={mensagem.id}>
-            <strong>{mensagem.email}:</strong> {mensagem.body}
-          </div>
-        ))}
+        {mensagens.map((mensagem, index) => {
+          if (index < indiceAtual) {
+            return (
+              <div key={mensagem.id}>
+                <strong>{mensagem.name}:</strong> {mensagem.body}
+              </div>
+            );
+          }
+          return null;
+        })}
       </div>
     </div>
   );
