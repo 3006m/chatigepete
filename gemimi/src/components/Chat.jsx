@@ -48,7 +48,7 @@ function ChatApi() {
       } else {
         clearInterval(idIntervalo);
       }
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(idIntervalo);
   }, [mensagens, indiceAtual]);
