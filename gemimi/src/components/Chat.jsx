@@ -21,7 +21,7 @@ function ChatApi() {
         }
         const comentariosObtidos = await resposta.json();
 
-        setMensagens(comentariosObtidos);
+        setMensagens(comentariosObtidos.slice(0,10));
         setCarregando(false);
 
       } catch (err) {
@@ -41,7 +41,7 @@ function ChatApi() {
       } else {
         clearInterval(idIntervalo);
       }
-    }, 5000);
+    }, 1000);
 
     return () => clearInterval(idIntervalo);
   }, [mensagens, indiceAtual]);
