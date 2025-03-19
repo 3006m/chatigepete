@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 
 function ChatApi() {
-  const [mensagens, setMensagens] = useState([]);
+  const [mensagens, setMensagens] = useState(() => {
+    const mensagensSalvas = localStorage.getItem('essa é a chave do local storage');
+    return mensagensSalvas ? JSON.parse(mensagensSalvas) : [];
+  });
+
   const [indiceAtual, setIndiceAtual] = useState(1);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState(null);
@@ -22,6 +26,9 @@ function ChatApi() {
         const comentariosObtidos = await resposta.json();
 
         setMensagens(comentariosObtidos);
+        localStorage.setItem('essa é a chave do local storage', JSON.stringify(comentariosObtidos));
+
+    
         setCarregando(false);
 
       } catch (err) {
@@ -41,7 +48,7 @@ function ChatApi() {
       } else {
         clearInterval(idIntervalo);
       }
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(idIntervalo);
   }, [mensagens, indiceAtual]);
