@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function ChatApi() {
   const [mensagens, setMensagens] = useState([]);
-  const [indiceAtual, setIndiceAtual] = useState(0);
+  const [indiceAtual, setIndiceAtual] = useState(1);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState(null);
 
@@ -21,16 +21,11 @@ function ChatApi() {
         }
         const comentariosObtidos = await resposta.json();
 
-        if (!Array.isArray(comentariosObtidos)) {
-          throw new Error("Os fucking dados não sao um arei"); 
-
-        }
-
         setMensagens(comentariosObtidos);
         setCarregando(false);
+
       } catch (err) {
         setErro(err.message);
-        setCarregando(false);
       }
     }
 
